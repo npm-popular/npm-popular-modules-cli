@@ -26,12 +26,6 @@ npm-popular
 ```
 
 
-## CLI
-
-```
-$ npm install --global npm-popular-modules-cli
-```
-
 ## Related
 
 - [npm-popular-modules](https://github.com/ZYSzys/npm-popular-modules)
