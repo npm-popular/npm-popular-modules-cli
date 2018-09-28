@@ -1,0 +1,46 @@
+{
+  "name": "npm-popular-modules-cli",
+  "version": "0.0.0",
+  "description": "CLI for npm-popular-modules",
+  "license": "MIT",
+  "repository": "ZYSzys/npm-popular-modules-cli",
+  "author": {
+    "name": "ZYSzys",
+    "email": "17367077526@163.com",
+    "url": "zyszys.top"
+  },
+  "bin": {
+    "npm-popular": "cli.js"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "test": "npm run lint && nyc ava -v",
+    "lint": "standard --fix"
+  },
+  "files": [
+    "cli.js"
+  ],
+  "keywords": [
+    "cli-app",
+    "cli"
+  ],
+  "dependencies": {
+    "npm-popular-modules": "0.1.1",
+    "ora": "3.0.0"
+  },
+  "devDependencies": {
+    "ava": "0.25.0",
+    "codecov": "3.0.0",
+    "execa": "1.0.0",
+    "nyc": "12.0.0",
+    "standard": "*"
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text"
+    ]
+  }
+}
