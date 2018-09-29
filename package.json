@@ -17,7 +17,7 @@
   },
   "scripts": {
     "test": "npm run lint && nyc ava -v",
-    "lint": "standard --fix"
+    "lint": "prettier --single-quote --write *.js"
   },
   "files": [
     "cli.js"
@@ -35,7 +35,7 @@
     "codecov": "3.1.0",
     "execa": "1.0.0",
     "nyc": "13.0.1",
-    "standard": "*"
+    "prettier": "1.14.3"
   },
   "nyc": {
     "reporter": [
