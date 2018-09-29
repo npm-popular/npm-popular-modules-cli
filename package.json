@@ -1,6 +1,6 @@
 {
   "name": "npm-popular-modules-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CLI for npm-popular-modules",
   "license": "MIT",
   "repository": "ZYSzys/npm-popular-modules-cli",
