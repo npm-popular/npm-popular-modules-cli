@@ -1,0 +1,167 @@
+MIT License
+
+Copyright (c) ZYSzys <17367077526@163.com> (zyszys.top)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+# npm-popular-modules-cli
+
+[![Build Status](https://travis-ci.org/ZYSzys/npm-popular-modules-cli.svg?branch=master)](https://travis-ci.org/ZYSzys/npm-popular-modules-cli)
+[![codecov](https://codecov.io/gh/ZYSzys/npm-popular-modules-cli/badge.svg?branch=master)](https://codecov.io/gh/ZYSzys/npm-popular-modules-cli?branch=master)
+[![NPM version](https://img.shields.io/npm/v/npm-popular-modules-cli.svg?style=flat)](https://npmjs.com/package/npm-popular-modules-cli)
+[![NPM downloads](https://img.shields.io/npm/dm/npm-popular-modules-cli.svg?style=flat)](https://npmjs.com/package/npm-popular-modules-cli)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier)
+[![license](https://img.shields.io/github/license/ZYSzys/npm-popular-modules-cli.svg)](https://github.com/ZYSzys/npm-popular-modules-cli/blob/master/LICENSE)
+
+> CLI fro npm-popular-modules
+
+![](/screenshot.png)
+
+## Install
+
+```
+$ npm install -g npm-popular-modules-cli
+```
+
+
+## Usage
+
+```js
+npm-popular
+//=> 'Write into Popular successfully.'
+```
+
+
+## Related
+
+- [npm-popular-modules](https://github.com/ZYSzys/npm-popular-modules)
+
+
+## License
+
+MIT © [ZYSzys](http://zyszys.top)
+{
+  "name": "npm-popular-modules-cli",
+  "version": "0.0.3",
+  "description": "CLI for npm-popular-modules",
+  "license": "MIT",
+  "repository": "ZYSzys/npm-popular-modules-cli",
+  "author": {
+    "name": "ZYSzys",
+    "email": "17367077526@163.com",
+    "url": "zyszys.top"
+  },
+  "bin": {
+    "npm-popular": "cli.js"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "scripts": {
+    "test": "npm run lint && nyc ava -v",
+    "lint": "prettier --single-quote --write *.js"
+  },
+  "files": [
+    "cli.js"
+  ],
+  "keywords": [
+    "cli-app",
+    "cli"
+  ],
+  "dependencies": {
+    "npm-popular-modules": "0.1.3",
+    "ora": "3.0.0"
+  },
+  "devDependencies": {
+    "ava": "0.25.0",
+    "codecov": "3.1.0",
+    "execa": "1.0.0",
+    "nyc": "13.0.1",
+    "prettier": "1.14.3"
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text"
+    ]
+  }
+}
+# The most popular node modules in npmjs.com.
+
+browserify => npmjs.com/package/browserify => https://github.com/browserify/browserify#readme => https://github.com/browserify/browserify
+grunt-cli => npmjs.com/package/grunt-cli => https://github.com/gruntjs/grunt-cli#readme => https://github.com/gruntjs/grunt-cli
+bower => npmjs.com/package/bower => http://bower.io => https://github.com/bower/bower
+gulp => npmjs.com/package/gulp => http://gulpjs.com => https://github.com/gulpjs/gulp
+grunt => npmjs.com/package/grunt => https://gruntjs.com/ => https://github.com/gruntjs/grunt
+express => npmjs.com/package/express => http://expressjs.com/ => https://github.com/expressjs/express
+npm => npmjs.com/package/npm => https://docs.npmjs.com/ => https://github.com/npm/cli
+cordova => npmjs.com/package/cordova => https://github.com/apache/cordova-cli#readme => https://github.com/apache/cordova-cli
+forever => npmjs.com/package/forever => https://github.com/foreverjs/forever#readme => https://github.com/foreverjs/forever
+lodash => npmjs.com/package/lodash => https://lodash.com/ => https://github.com/lodash/lodash
+request => npmjs.com/package/request => https://github.com/request/request#readme => https://github.com/request/request
+chalk => npmjs.com/package/chalk => https://github.com/chalk/chalk#readme => https://github.com/chalk/chalk
+async => npmjs.com/package/async => https://caolan.github.io/async/ => https://github.com/caolan/async
+express => npmjs.com/package/express => http://expressjs.com/ => https://github.com/expressjs/express
+react => npmjs.com/package/react => https://reactjs.org/ => https://github.com/facebook/react
+bluebird => npmjs.com/package/bluebird => https://github.com/petkaantonov/bluebird => https://github.com/petkaantonov/bluebird
+commander => npmjs.com/package/commander => https://github.com/tj/commander.js#readme => https://github.com/tj/commander.js
+debug => npmjs.com/package/debug => https://github.com/visionmedia/debug#readme => https://github.com/visionmedia/debug
+
+# Generated by npm-popular-modules-cli.
+#!/usr/bin/env node
+
+"use strict";
+
+const fs = require("fs");
+const ora = require("ora");
+const npmPopular = require("npm-popular-modules");
+
+const spinner = ora("Fetching from npmjs.com...");
+spinner.start();
+
+const args = process.argv.slice(2);
+
+(async () => {
+  try {
+    const list = await npmPopular();
+    spinner.stop();
+
+    for (const nm of list) {
+      console.log(
+        `${nm.name} => ${nm.url} => ${nm.homepage} => ${nm.github}`
+      );
+    }
+
+    if (args.includes("-s")) writeToFile(list);
+  } catch (e) {
+    spinner.stop();
+    throw TypeError("Cannot fetch data from npmjs.com");
+  }
+})();
+
+const writeToFile = list => {
+  const output = fs.createWriteStream("Popular");
+
+  output.write("# The most popular node modules in npmjs.com.\n\n");
+  for (const nm of list) {
+    output.write(`${nm.name} => ${nm.url} => ${nm.homepage} => ${nm.github}\n`);
+  }
+  output.end("\n# Generated by npm-popular-modules-cli.\n");
+
+  console.log("Write into Popular successfully.");
+};
+{
+  "extends": [
+    "config:base"
+  ]
+}
+import test from 'ava';
+import execa from 'execa';
+
+test('write to Popular', async t => {
+  const res = await execa('./cli.js');
+  t.is(res.stdout, 'Write into Popular successfully.');
+});
